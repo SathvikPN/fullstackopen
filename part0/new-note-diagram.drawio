@@ -1,0 +1,118 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" version="28.2.9">
+  <diagram name="Page-1" id="t8HC973p-idyOKvfS2Ge">
+    <mxGraphModel dx="1216" dy="772" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="GW8ksnYbE1tvJGsQY740-1" value="browser" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fontStyle=0;strokeWidth=3;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;shadow=0;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="150" height="873" as="geometry" />
+        </mxCell>
+        <mxCell id="GW8ksnYbE1tvJGsQY740-2" value="server" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fontStyle=0;strokeWidth=3;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;shadow=0;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="728" y="20" width="150" height="873" as="geometry" />
+        </mxCell>
+        <mxCell id="GW8ksnYbE1tvJGsQY740-3" value="" style="points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;shadow=0;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="GW8ksnYbE1tvJGsQY740-2">
+          <mxGeometry x="70" y="103" width="10" height="107" as="geometry" />
+        </mxCell>
+        <mxCell id="GW8ksnYbE1tvJGsQY740-4" value="" style="points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;shadow=0;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="GW8ksnYbE1tvJGsQY740-2">
+          <mxGeometry x="70" y="315" width="10" height="77" as="geometry" />
+        </mxCell>
+        <mxCell id="GW8ksnYbE1tvJGsQY740-5" value="" style="points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;shadow=0;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="GW8ksnYbE1tvJGsQY740-2">
+          <mxGeometry x="70" y="430" width="10" height="58" as="geometry" />
+        </mxCell>
+        <mxCell id="GW8ksnYbE1tvJGsQY740-6" value="" style="points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;shadow=0;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="GW8ksnYbE1tvJGsQY740-2">
+          <mxGeometry x="70" y="526" width="10" height="58" as="geometry" />
+        </mxCell>
+        <mxCell id="GW8ksnYbE1tvJGsQY740-7" value="" style="points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;shadow=0;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="GW8ksnYbE1tvJGsQY740-2">
+          <mxGeometry x="70" y="671" width="10" height="58" as="geometry" />
+        </mxCell>
+        <mxCell id="GW8ksnYbE1tvJGsQY740-8" value="POST https://studies.cs.helsinki.fi/exampleapp/new_note" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;fontStyle=0;strokeWidth=3;fillColor=#f5f5f5;strokeColor=#666666;shadow=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="GW8ksnYbE1tvJGsQY740-1" target="GW8ksnYbE1tvJGsQY740-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="458" y="123" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GW8ksnYbE1tvJGsQY740-9" value="302 FOUND (redirect)" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;fontStyle=0;strokeWidth=3;fillColor=#f5f5f5;strokeColor=#666666;shadow=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="GW8ksnYbE1tvJGsQY740-3" target="GW8ksnYbE1tvJGsQY740-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="459" y="220" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GW8ksnYbE1tvJGsQY740-10" value="GET https://studies.cs.helsinki.fi/exampleapp/notes" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;fontStyle=0;strokeWidth=3;fillColor=#f5f5f5;strokeColor=#666666;shadow=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="GW8ksnYbE1tvJGsQY740-1" target="GW8ksnYbE1tvJGsQY740-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="458" y="335" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GW8ksnYbE1tvJGsQY740-11" value="HTTP/1.1 200 OK &#xa; content-type: text/html content-length: 439" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;fontStyle=0;strokeWidth=3;fillColor=#f5f5f5;strokeColor=#666666;shadow=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="GW8ksnYbE1tvJGsQY740-4" target="GW8ksnYbE1tvJGsQY740-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="459" y="402" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GW8ksnYbE1tvJGsQY740-12" value="GET /exampleapp/main.css" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;fontStyle=0;strokeWidth=3;fillColor=#f5f5f5;strokeColor=#666666;shadow=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="GW8ksnYbE1tvJGsQY740-1" target="GW8ksnYbE1tvJGsQY740-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="458" y="450" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GW8ksnYbE1tvJGsQY740-13" value="the css file" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;fontStyle=0;strokeWidth=3;fillColor=#f5f5f5;strokeColor=#666666;shadow=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="GW8ksnYbE1tvJGsQY740-5" target="GW8ksnYbE1tvJGsQY740-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="459" y="498" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GW8ksnYbE1tvJGsQY740-14" value="GET /exampleapp/main.js" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;fontStyle=0;strokeWidth=3;fillColor=#f5f5f5;strokeColor=#666666;shadow=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="GW8ksnYbE1tvJGsQY740-1" target="GW8ksnYbE1tvJGsQY740-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="458" y="546" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GW8ksnYbE1tvJGsQY740-15" value="the JavaScript file" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;fontStyle=0;strokeWidth=3;fillColor=#f5f5f5;strokeColor=#666666;shadow=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="GW8ksnYbE1tvJGsQY740-6" target="GW8ksnYbE1tvJGsQY740-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="459" y="594" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GW8ksnYbE1tvJGsQY740-16" value="GET https://studies.cs.helsinki.fi/exampleapp/data.json" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;fontStyle=0;strokeWidth=3;fillColor=#f5f5f5;strokeColor=#666666;shadow=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="GW8ksnYbE1tvJGsQY740-1" target="GW8ksnYbE1tvJGsQY740-7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="458" y="691" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GW8ksnYbE1tvJGsQY740-17" value="[{ &quot;content&quot;: &quot;HTML is easy&quot;, &quot;date&quot;: &quot;2023-1-1&quot; }, ... ]" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;fontStyle=0;strokeWidth=3;fillColor=#f5f5f5;strokeColor=#666666;shadow=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="GW8ksnYbE1tvJGsQY740-7" target="GW8ksnYbE1tvJGsQY740-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="459" y="739" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GW8ksnYbE1tvJGsQY740-18" value="form data payload &#39;note=my+new+note&#39;" style="fontStyle=0;strokeWidth=3;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;shadow=0;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="120" y="143" width="310" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="GW8ksnYbE1tvJGsQY740-19" value="Response Header &#xa; location: /exampleapp/notes" style="fontStyle=0;strokeWidth=3;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;shadow=0;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="554" y="240" width="224" height="67" as="geometry" />
+        </mxCell>
+        <mxCell id="GW8ksnYbE1tvJGsQY740-20" value="The browser starts executing the JavaScript code that fetches the JSON from the server" style="fontStyle=0;strokeWidth=3;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;shadow=0;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="120" y="614" width="658" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="GW8ksnYbE1tvJGsQY740-21" value="The browser executes the callback function that renders the notes" style="fontStyle=0;strokeWidth=3;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;shadow=0;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="120" y="759" width="499" height="49" as="geometry" />
+        </mxCell>
+        <UserObject label="fundamentals_of_web_apps#exercises-0-1-0-6" linkTarget="_blank" link="https://fullstackopen.com/en/part0/fundamentals_of_web_apps#exercises-0-1-0-6" id="GW8ksnYbE1tvJGsQY740-22">
+          <mxCell style="fontColor=#0000EE;fontStyle=4;rounded=1;overflow=hidden;spacing=10;fillColor=default;fillStyle=dots;gradientColor=none;sketch=1;curveFitting=1;jiggle=2;shadow=0;glass=0;" vertex="1" parent="1">
+            <mxGeometry x="335" y="20" width="284" height="42" as="geometry" />
+          </mxCell>
+        </UserObject>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
