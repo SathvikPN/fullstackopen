@@ -1,4 +1,5 @@
 const Header = (props) => {
+  console.log(props)
   return (
     <>
       <h1> {props.course} </h1>
@@ -15,49 +16,56 @@ const Part = (props) => {
 }
 
 const Content = (props) => {
-  const parts = props.parts 
-  const exercises = props.exercises
-
+  console.log(props)
+  const part = props.part
   return (
     <>
-      <Part part={parts[0]} exercise={exercises[0]} />
-      <Part part={parts[1]} exercise={exercises[1]} />
-      <Part part={parts[2]} exercise={exercises[2]} />
+      <Part part={part.name} exercise={part.exercises} />
     </>
   )
 }
 
 const Total = (props) => {
-  const numbersArray = props.numbers;
-  const totalSum = numbersArray.reduce((accumulator, currentValue) => {
-    // For each item, add the currentValue to the accumulator (running total)
-    return accumulator + currentValue; 
-  }, 0); // The '0' is the initial value of the accumulator
-
+  const parts = props.parts
+  
+  // Use the Array.prototype.reduce() method to calculate the sum.
+  // The first argument (acc) is the accumulated total (starting at 0), 
+  // and the second argument (part) is the current object in the array.
+  const totalExercises = parts.reduce((acc, part) => {
+    return acc + part.exercises;
+  }, 0); // The '0' initializes the accumulator (acc)
+  
   return (
-    <>
-      <p>Number of exercises {totalSum}</p>
-    </>
-  );
+    <p className="font-bold mt-4">
+      Total number of exercises: {totalExercises}
+    </p>
+  )
 }
 
 const App = () => {
   const course = 'Half Stack application development'
-  const part1 = 'Fundamentals of React'
-  const exercises1 = 10
-  const part2 = 'Using props to pass data'
-  const exercises2 = 7
-  const part3 = 'State of a component'
-  const exercises3 = 14
+  const part1 = {
+    name: 'Fundamentals of React',
+    exercises: 10
+  }
+  const part2 = {
+    name: 'Using props to pass data',
+    exercises: 7
+  }
+  const part3 = {
+    name: 'State of a component',
+    exercises: 14
+  }
 
-  const exercises = [exercises1, exercises2, exercises3]
   const parts = [part1, part2, part3]
   return (
-    <>
+    <div>
       <Header course={course}/>
-      <Content parts={parts} exercises={exercises} />
-      <Total numbers={exercises} />
-    </>
+      <Content part={part1}/>
+      <Content part={part2}/>
+      <Content part={part3}/>
+      <Total parts={parts} />
+    </div>
   )
 }
 
