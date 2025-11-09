@@ -17,13 +17,16 @@ const handlePositivePercentage = ({good, all}) => {
     return positivePercent
 }
 
-const StatisticLine = ({ text, value }) => {
+const StatisticTableRow = ({ text, value }) => {
   return (
-    <>
-    <p>{text} {value}</p>
-    </>
-  )
-}
+    <tr>
+      {/* Table cells display the key/value pair */}
+      <td>{text}</td>
+      <td>{value}</td>
+    </tr>
+  );
+};
+
 
 const DisplayStats = (statsData) => {
   if (statsData.all == 0) {
@@ -34,13 +37,22 @@ const DisplayStats = (statsData) => {
 
   return (
     <>
-    <StatisticLine text="good" value ={statsData.good} />
-    <StatisticLine text="bad" value ={statsData.bad} />
-    <StatisticLine text="neutral" value ={statsData.neutral} />
+    <table>
+      <thead>
+          <th>Metric</th>
+          <th>Value</th>
 
-    <StatisticLine text="all" value ={statsData.all} />
-    <StatisticLine text="average" value ={statsData.average.toFixed(2)} />
-    <StatisticLine text="positive" value ={statsData.positivePercentage.toFixed(2)} />
+      </thead>
+
+    <StatisticTableRow text="good" value ={statsData.good} />
+    <StatisticTableRow text="bad" value ={statsData.bad} />
+    <StatisticTableRow text="neutral" value ={statsData.neutral} />
+
+    <StatisticTableRow text="all" value ={statsData.all} />
+    <StatisticTableRow text="average" value ={statsData.average.toFixed(2)} />
+    <StatisticTableRow text="positive" value ={statsData.positivePercentage.toFixed(2)} />
+
+    </table>
     </>
   )
   
