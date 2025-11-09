@@ -62,7 +62,7 @@ const App = () => {
     event.preventDefault()
     console.log("btn clicked", event.target)
     const newPersonObject = {
-      id: crypto.randomUUID(),
+      id: crypto.randomUUID(), // let server decide unique id
       name: newName,
       number: newNumber
     }
@@ -73,7 +73,15 @@ const App = () => {
     if(isNameExist) {
       alert(`${newName} already added to phonebook`)
     } else {
-      setPersons(persons.concat(newPersonObject))
+      axios.post('http://localhost:3001/persons', newPersonObject)
+      .then(response => {
+        setPersons(persons.concat(response.data))
+      })
+      .catch(error => {
+        alert(error)
+        console.log('failed to put', error)
+      })
+      
     }
     setNewName('')
     setNewNumber('')
