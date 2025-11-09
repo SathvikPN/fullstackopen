@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 const Filter = ({ persons }) => {
   const [name, setName] = useState('')
@@ -20,7 +21,7 @@ const Filter = ({ persons }) => {
     )
   }
   
-  console.log('matchedPersons :>> ', matchedPersons);
+  // console.log('matchedPersons :>> ', matchedPersons);
 
 
   return (
@@ -32,7 +33,7 @@ const Filter = ({ persons }) => {
           const serialNumber = index + 1
 
           return (
-            <p key={person.name}> ({serialNumber}) {person.name} :: {person.phone} :: {person.id}  </p>
+            <p key={person.name}> ({serialNumber}) {person.name} :: {person.number} :: {person.id}  </p>
           )
         }) }
       </div>
@@ -42,14 +43,19 @@ const Filter = ({ persons }) => {
 }
 
 const App = () => {
-  const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', phone: '040-123456', id: 1 },
-    { name: 'Ada Lovelace', phone: '39-44-5323523', id: 2 },
-    { name: 'Dan Abramov', phone: '12-43-234345', id: 3 },
-    { name: 'Mary Poppendieck', phone: '39-23-6423122', id: 4 }
-  ]) 
+  const [persons, setPersons] = useState([]) 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
+
+  useEffect(() => {
+    console.log('useEffect entered');
+    axios.get('http://localhost:3001/persons').then(response => {
+      console.log('promise fulfilled for get notes')
+      setPersons(response.data) // note: call to a state-updating function triggers the re-rendering of the component
+    })
+  }, []) // note: pass second param [], else infinite re-rerendering
+  console.log('render', persons.length, 'persons');
+  
 
   // onSubmit of form, add Name to Persons
   const addPerson = (event) => {
@@ -58,7 +64,7 @@ const App = () => {
     const newPersonObject = {
       id: crypto.randomUUID(),
       name: newName,
-      phone: newNumber
+      number: newNumber
     }
     
     // const isNameExist = persons.filter((person) => person.name === newName) // iterates all array even if matched early
@@ -104,7 +110,7 @@ const App = () => {
       <div>debug: {newName} && {newNumber} </div>
       <h2>Numbers</h2>
       { persons.map((person) => {
-        return <div key={person.id}> {person.name}  {person.phone} </div>
+        return <div key={person.id}> {person.name}  {person.number} </div>
       }) }
     </div>
   )
