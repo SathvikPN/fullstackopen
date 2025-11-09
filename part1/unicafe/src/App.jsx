@@ -1,6 +1,23 @@
 import { useState } from 'react'
 
-const handleFeedback = (statsData) => {
+const handleScore = ({good, neutral, bad}) => {
+  const score = (good * 1) + (bad * -1) + (neutral * 0)
+  return score
+}
+
+const handleAverage = ({ good, neutral, bad }) => {
+  const total = good + neutral + bad 
+  const scoreSum = handleScore({good, neutral, bad})
+  const avg = scoreSum / total;
+  return avg
+}
+
+const handlePositivePercentage = ({good, all}) => {
+    const positivePercent = (good / all) * 100;
+    return positivePercent
+}
+
+const DisplayStats = (statsData) => {
   if (statsData.all == 0) {
     return (
       <p>No feedback given</p>
@@ -9,7 +26,6 @@ const handleFeedback = (statsData) => {
 
   return (
     <>
-      <h1>Statistics</h1>
       <ul>
         <li>good {statsData.good}</li>
         <li>neutral {statsData.neutral}</li>
@@ -24,61 +40,40 @@ const handleFeedback = (statsData) => {
   
 }
 
-
-const handleScore = (props) => {
-  const {good, neutral, bad} = props
-  const score = (good * 1) + (bad * -1) + (neutral * 0)
-  return score
-}
-
-const handleAverage = (props) => {
-  const {good, neutral, bad} = props
-  const total = good + neutral + bad 
-  const scoreSum = handleScore(props)
-  const avg = scoreSum / total;
-  return avg
-}
-
-const handlePositivePercentage = ({good, all}) => {
-    const positivePercent = (good / all) * 100;
-    return positivePercent
-}
-
 const Statistics = (props) => {
   console.log(props)
   const {good, neutral, bad} = props
-  const [all, setAll] = useState( (good + neutral + bad) || 0)
-  const [average, setAverage] = useState( handleAverage(props) || 0)
-  const [positivePercentage, setPositivePercentage] = useState( handlePositivePercentage(good, all) || 0)
+  const all = good + neutral + bad 
+  const average = handleAverage({ good, neutral, bad })
+  const positivePercentage = handlePositivePercentage({ all, good }) 
+  // handlePositivePercentage(good, all) positional args has to maintain order
 
   const statsData = {
-    good: good,
-    bad: bad,
-    neutral: neutral,
-    all: all,
-    average: average,
-    positivePercentage: positivePercentage
+    good, neutral, bad, all, average, positivePercentage
   };
 
   return (
     <>
       <h1>Statistics</h1>
-      {handleFeedback(statsData)}
+      {DisplayStats(statsData)}
     </>
 
   )
 }
 
+
+// --- 5. Main Application Component ---
 const App = () => {
-  // save clicks of each button to its own state
+  // Use separate useState hooks for independent, simple state variables (Best Practice for performance)
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
   // Event handlers for each button click
-  const handleGoodClick = () => setGood(good+1)
-  const handleNeutralClick = () => setNeutral(neutral+1)
-  const handleBadClick = () => setBad(bad+1)
+  // Use the functional update form (prev => prev + 1) to ensure reliability against race condition
+  const handleGoodClick = () => setGood(good => good+1)
+  const handleNeutralClick = () => setNeutral(neutral => neutral+1)
+  const handleBadClick = () => setBad(bad => bad+1)
 
   return (
     <div>
