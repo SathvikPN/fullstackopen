@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import personService from './services/persons'
+import Notification from './components/Notification'
 
 const Filter = ({ persons }) => {
   const [name, setName] = useState('')
@@ -47,6 +48,7 @@ const App = () => {
   const [persons, setPersons] = useState([]) 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
+  const [msg, setMsg] =useState('')
 
   // useEffect(() => {
   //   console.log('useEffect entered');
@@ -99,7 +101,11 @@ const App = () => {
       // reset ui form view, else this value retained/visible in input even after form submit
       setNewName('')
       setNewNumber('')
-      
+      setMsg(`Added ${newPersonObject.name} successfully`) // display right away
+      setTimeout( () => {
+        console.log('setting notification msg null')
+        setMsg(null)
+      }, 3000) // setmsg null after 3 seconds
     }
   }
 
@@ -125,6 +131,11 @@ const App = () => {
     .then(response => {
       console.log("delete response == ", response)
       setPersons(persons.filter(p => p.id !== deletePersonObj.id))
+      setMsg(`Deleted ${deletePersonObj.name} successfully`) // display right away
+      setTimeout( () => {
+        console.log('setting notification msg null')
+        setMsg(null)
+      }, 3000) // setmsg null after 3 seconds
     })
     .catch(error => {
       // 🔴 FAILURE: An error occurred during the API call (rejected promise).
@@ -176,6 +187,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={msg} />
       <Filter persons={persons} />
       <form onSubmit={addPerson}>
         <div>
