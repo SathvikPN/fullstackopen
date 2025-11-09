@@ -1,33 +1,34 @@
-const Note = ({ note }) => {
-  return (
-    <li> {note.content} </li>
-  )
-}
+import Course from "./components/Course"
 
-const App = ({ notes }) => {
+const App = () => {
+  const course = {
+    id: 1,
+    name: 'Half Stack application development',
+    parts: [
+      {
+        name: 'Fundamentals of React',
+        exercises: 10,
+        id: 1
+      },
+      {
+        name: 'Using props to pass data',
+        exercises: 7,
+        id: 2
+      },
+      {
+        name: 'State of a component',
+        exercises: 14,
+        id: 3
+      },
+      {
+        name: 'Testing My Additional component',
+        exercises: 1,
+        id: 4
+      }
+    ]
+  }
 
-  return (
-    <div>
-      <h1>Notes</h1>
-      
-      {/* <ul>
-        <li>{notes[0].content}</li>
-        <li>{notes[1].content}</li>
-        <li>{notes[2].content}</li>
-      </ul> */}
-
-      <ul>
-        { notes.map( 
-          (note) => {
-            return (
-              // <li key={note.id}> {note.content} </li>
-              <Note key={note.id} note={note} /> 
-            )
-          }
-        ) }
-      </ul>
-    </div>
-  )
+  return <Course course={course} />
 }
 
 export default App
