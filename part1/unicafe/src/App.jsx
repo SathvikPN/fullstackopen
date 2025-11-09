@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const handleFeedback = ({statsData}) => {
+const handleFeedback = (statsData) => {
   if (statsData.all == 0) {
     return (
       <p>No feedback given</p>
