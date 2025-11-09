@@ -17,6 +17,14 @@ const handlePositivePercentage = ({good, all}) => {
     return positivePercent
 }
 
+const StatisticLine = ({ text, value }) => {
+  return (
+    <>
+    <p>{text} {value}</p>
+    </>
+  )
+}
+
 const DisplayStats = (statsData) => {
   if (statsData.all == 0) {
     return (
@@ -26,15 +34,13 @@ const DisplayStats = (statsData) => {
 
   return (
     <>
-      <ul>
-        <li>good {statsData.good}</li>
-        <li>neutral {statsData.neutral}</li>
-        <li>bad {statsData.bad}</li>
-        <hr />
-        <li>all {statsData.all}</li>
-        <li>average {statsData.average.toFixed(2)}</li> {/* Format average to 2 decimal places */}
-        <li>positive {statsData.positivePercentage.toFixed(2)} %</li> {/* Display positive percentage */}
-      </ul>
+    <StatisticLine text="good" value ={statsData.good} />
+    <StatisticLine text="bad" value ={statsData.bad} />
+    <StatisticLine text="neutral" value ={statsData.neutral} />
+
+    <StatisticLine text="all" value ={statsData.all} />
+    <StatisticLine text="average" value ={statsData.average.toFixed(2)} />
+    <StatisticLine text="positive" value ={statsData.positivePercentage.toFixed(2)} />
     </>
   )
   
