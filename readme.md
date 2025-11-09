@@ -37,4 +37,6 @@ RUN `node fp.js`
 
 ![image](./state-vs-regular-variables.png)
 
+A clear indicator that a project uses npm is the package.json file located at the root of the project:
+
 https://fullstackopen.com/en/
