@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import personService from './services/persons'
 
 const Filter = ({ persons }) => {
   const [name, setName] = useState('')
@@ -47,14 +48,20 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
 
+  // useEffect(() => {
+  //   console.log('useEffect entered');
+  //   axios.get('http://localhost:3001/persons').then(response => {
+  //     console.log('promise fulfilled for get notes')
+  //     setPersons(response.data) // note: call to a state-updating function triggers the re-rendering of the component
+  //   })
+  // }, []) // note: pass second param [], else infinite re-rerendering
+  // console.log('render', persons.length, 'persons');
+
+  // use services module to separate logic
   useEffect(() => {
-    console.log('useEffect entered');
-    axios.get('http://localhost:3001/persons').then(response => {
-      console.log('promise fulfilled for get notes')
-      setPersons(response.data) // note: call to a state-updating function triggers the re-rendering of the component
-    })
-  }, []) // note: pass second param [], else infinite re-rerendering
-  console.log('render', persons.length, 'persons');
+    personService.getAll()
+    .then(initalPersons => setPersons(initalPersons))
+  }, [])
   
 
   // onSubmit of form, add Name to Persons
@@ -73,18 +80,27 @@ const App = () => {
     if(isNameExist) {
       alert(`${newName} already added to phonebook`)
     } else {
-      axios.post('http://localhost:3001/persons', newPersonObject)
-      .then(response => {
-        setPersons(persons.concat(response.data))
+
+      // axios.post('http://localhost:3001/persons', newPersonObject)
+      // .then(response => {
+      //   setPersons(persons.concat(response.data))
+      // })
+      // .catch(error => {
+      //   alert(error)
+      //   console.log('failed to put', error)
+      // })
+
+      // user service module
+      personService.createPerson(newPersonObject)
+      .then(responseData => {
+        setPersons(persons.concat(responseData))
       })
-      .catch(error => {
-        alert(error)
-        console.log('failed to put', error)
-      })
+
+      // reset ui form view, else this value retained/visible in input even after form submit
+      setNewName('')
+      setNewNumber('')
       
     }
-    setNewName('')
-    setNewNumber('')
   }
 
   const handleNameChange = (event) => {
