@@ -35,4 +35,6 @@ Objects are not valid as a React child, only primitive types are.
 
 RUN `node fp.js`
 
+![image](./state-vs-regular-variables.png)
+
 https://fullstackopen.com/en/
