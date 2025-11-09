@@ -114,6 +114,23 @@ const App = () => {
     setNewNumber(event.target.value) // use the user typed text via form
   }
 
+  const handleDeletePerson = (deletePersonObj) => {
+    if(!window.confirm(`delete ${deletePersonObj.name} ?`)) {
+      return
+    }
+
+    personService.deletePerson(deletePersonObj.id)
+    .then(response => {
+      console.log("delete response == ", response)
+      setPersons(persons.filter(p => p.id !== deletePersonObj.id))
+    })
+    .catch(error => {
+      // alert(`unavailable to delete ${deletePersonObj} from server`)
+      console.log(`failed to delete ${deletePersonObj.name}`, error)
+      setPersons(persons.filter(p => p.id !== deletePersonObj.id)) // fix view in sync with server data
+    })
+  }
+
   console.log("Persons: ", persons)
 
   return (
@@ -134,7 +151,12 @@ const App = () => {
       <div>debug: {newName} && {newNumber} </div>
       <h2>Numbers</h2>
       { persons.map((person) => {
-        return <div key={person.id}> {person.name}  {person.number} </div>
+        return (
+          <>
+          <div key={person.id}> {person.name}  {person.number} </div>
+          <button onClick={() => handleDeletePerson(person)}>delete</button>
+          </>
+        )
       }) }
     </div>
   )
