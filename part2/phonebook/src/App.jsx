@@ -6,13 +6,24 @@ const App = () => {
   ]) 
   const [newName, setNewName] = useState('')
 
+  // onSubmit of form, add Name to Persons
   const addName = (event) => {
     event.preventDefault()
     console.log("btn clicked", event.target)
     const newPersonObject = {
       name: newName
     }
-    setPersons(persons.concat(newPersonObject))
+    
+    // const isNameExist = persons.filter((person) => person.name === newName) // iterates all array even if matched early
+    const isNameExist = persons.some((person) => person.name === newName)
+
+    if(isNameExist) {
+      alert(`${newName} already added to phonebook`)
+    } else {
+      setPersons(persons.concat(newPersonObject))
+    }
+
+    
     setNewName('')
   }
 
