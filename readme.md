@@ -12,13 +12,17 @@ The Test Drive Mechanic,For one-off commands or tools you don't need to keep (np
 It is forbidden in React to mutate state directly, since it can result in unexpected side effects. 
 Changing state has to always be done by setting the state to a new object.
 
-NO ```
+NO 
+```
 const handleLeftClick = () => {
   clicks.left++
   setClicks(clicks)
-} ```
+} 
+```
 
-OK ```const handleLeftClick = () => {
+OK 
+```
+const handleLeftClick = () => {
   const newClicks = { 
     ...clicks, 
     left: clicks.left + 1 
@@ -28,5 +32,7 @@ OK ```const handleLeftClick = () => {
 ```
 
 Objects are not valid as a React child, only primitive types are.
+
+RUN `node fp.js`
 
 https://fullstackopen.com/en/
