@@ -12,7 +12,8 @@ const createPerson = (personObj) => {
 }
 
 const deletePerson = (personID) => {
-    return axios.delete(baseURL, personID)
+    const deleteURL = `${baseURL}/${personID}` // note: how to handle if url itself was wrong
+    return axios.delete(deleteURL)
     .then(response => response)
 }
 

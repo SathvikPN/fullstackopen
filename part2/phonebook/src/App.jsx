@@ -116,19 +116,59 @@ const App = () => {
 
   const handleDeletePerson = (deletePersonObj) => {
     if(!window.confirm(`delete ${deletePersonObj.name} ?`)) {
+      console.log("reject delete")
       return
     }
 
+    console.log("deleting ", deletePersonObj.name, deletePersonObj.id)
     personService.deletePerson(deletePersonObj.id)
     .then(response => {
       console.log("delete response == ", response)
       setPersons(persons.filter(p => p.id !== deletePersonObj.id))
     })
     .catch(error => {
-      // alert(`unavailable to delete ${deletePersonObj} from server`)
-      console.log(`failed to delete ${deletePersonObj.name}`, error)
-      setPersons(persons.filter(p => p.id !== deletePersonObj.id)) // fix view in sync with server data
-    })
+      // 🔴 FAILURE: An error occurred during the API call (rejected promise).
+      
+      if (error.response) {
+        // ------------------------------------------------------------------
+        // Case 1: API call *returned an error status* (e.g., 404, 400, 500).
+        // This means the server received the request but rejected it.
+        // ------------------------------------------------------------------
+
+        if (error.response.status === 404) {
+          // Specific Case: Resource Not Found (already deleted).
+          // The item doesn't exist on the server, so we should sync the view!
+          alert(`Information of ${deletePersonObj.name} was already removed from server.`);
+          
+          // FIX: Sync the view because the server confirms it's gone.
+          setPersons(persons.filter(p => p.id !== deletePersonObj.id)); 
+
+        } else {
+          // Generic Server Error (e.g., 403 Forbidden, 500 Internal Server Error)
+          console.error('API Call Errored (Server Response):', error.response.status, error.response.data);
+          alert(`Server error occurred (${error.response.status}). Cannot delete ${deletePersonObj.name}.`);
+          // If it's a 500, we typically DON'T sync the view, as we don't know the state.
+        }
+        
+      } else if (error.request) {
+        // ------------------------------------------------------------------
+        // Case 2: API call failed due to no response (Network Error, Timeout).
+        // The request was made, but no response was received (e.g., server offline).
+        // ------------------------------------------------------------------
+        console.error('Network Error (No Response):', error.request);
+        alert('Network error or timeout. Please check your connection.');
+        
+        // We CANNOT sync the view, as we don't know if the deletion happened.
+        
+      } else {
+        // ------------------------------------------------------------------
+        // Case 3: Setup Error (Error in code/config).
+        // Something went wrong in setting up the request.
+        // ------------------------------------------------------------------
+        console.error('Request Setup Error:', error.message);
+        alert('An unexpected application error occurred.');
+      }
+    });
   }
 
   console.log("Persons: ", persons)
@@ -152,10 +192,10 @@ const App = () => {
       <h2>Numbers</h2>
       { persons.map((person) => {
         return (
-          <>
-          <div key={person.id}> {person.name}  {person.number} </div>
-          <button onClick={() => handleDeletePerson(person)}>delete</button>
-          </>
+          <div key={person.id}> 
+            {person.name}  {person.number} 
+            <button onClick={() => handleDeletePerson(person)}>delete</button> 
+          </div>
         )
       }) }
     </div>
