@@ -12,10 +12,15 @@ const App = () => {
     'The only way to go fast, is to go well.'
   ]
     
+  // State for tracking the currently displayed anecdote's index
   const [selected, setSelected] = useState(0)
 
+  // State for tracking the vote count for each anecdote
+  // An array of zeros, initialized to the length of the anecdotes array.
+  const [votes, setVotes] = useState(new Array(anecdotes.length).fill(0))
+
   // Handler function to select a new random anecdote
-  const handleClick = () => {
+  const handleNextAnecdote = () => {
     // Generate a random integer between 0 and the total number of anecdotes
     const randomIndex = Math.floor(Math.random() * anecdotes.length);
     
@@ -23,11 +28,57 @@ const App = () => {
     setSelected(randomIndex);
   }
 
+  // Handler function to handle voting for the currently selected anecdote
+  const handleVote = () => {
+    // 1. Create a safe copy of the current 'votes' array (Immutability is key in React)
+    const newVotes = [...votes];
+
+    // 2. Increment the vote count for the currently 'selected' anecdote's index
+    newVotes[selected] += 1;
+
+    // 3. Update the state with the new array
+    setVotes(newVotes);
+  }
+
+  const mostVotedAnecdote = () => {
+    // Find the highest vote count and its corresponding index
+    const maxVotes = Math.max(...votes);
+    const highestVotedIndex = votes.indexOf(maxVotes);
+
+    // Standard IF/ELSE conditional logic to determine what JSX to render
+    if (maxVotes > 0) {
+      // If at least one vote has been cast, display the most popular anecdote
+      return (
+        <div>
+          <p>{anecdotes[highestVotedIndex]}</p>
+          <p>Has {maxVotes} votes</p>
+        </div>
+      )
+    } else {
+      // If no votes have been recorded, display a placeholder message
+      return (
+        <p>No votes have been recorded yet.</p>
+      )
+    }
+  }
+
+
+
+
+
   return (
     <div>
-      {/* Display the anecdote corresponding to the current 'selected' index */}
+      <h2>Anecdote of the Day</h2>
       <p>{anecdotes[selected]}</p>
-      <button onClick={handleClick}>Next Anecdote</button>
+      <p>Has {votes[selected]} votes</p>
+      
+      {/* Buttons */}
+      <button onClick={handleVote}>Vote</button>
+      <button onClick={handleNextAnecdote}>Next Anecdote</button>
+
+      <hr />
+      <h2>Anecdote with Most Votes</h2>
+      {mostVotedAnecdote()}
     </div>
   )
 }
