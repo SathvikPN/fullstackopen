@@ -1,6 +1,6 @@
 const Note = ({ part }) => {
     return (
-        <li> {part.name} </li>
+        <li> {part.name}  {part.exercises}</li>
     )
 }
 export default Note 

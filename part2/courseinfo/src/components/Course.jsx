@@ -1,6 +1,13 @@
-import Note
- from "./Note"
+import Note from "./Note"
 const Course = ({ course }) => {
+    const totalExercises = () => {
+        const total = course.parts.reduce(function(esum, part) {
+            return esum + part.exercises
+        }, 0)
+
+        return total
+    }
+    
     return (
         <>
         <h1> {course.name} </h1>
@@ -12,6 +19,8 @@ const Course = ({ course }) => {
                 )
             }) }
         </ul>
+
+        <p> Total of {totalExercises()} exercises</p>
         </>
     )
 
