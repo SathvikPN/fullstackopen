@@ -2,12 +2,13 @@ import { useState } from 'react'
 import { useEffect } from 'react';
 import axios from "axios";
 
-import countryService from './services/country'
+import countryService from './services/country' 
 
 function App() {
   const [country, setCountry] = useState('')
   const [cdata, setCdata] = useState([])
-  const [selectedCountry, setSelectedCountry] = useState('')
+  // State to hold the country object to display in the detailed view
+  const [selectedCountry, setSelectedCountry] = useState(null) 
 
   useEffect(() => {
     countryService.getAll()
@@ -26,24 +27,21 @@ function App() {
     })
   }, []) // [] empty dependancy array: API call runs only once when the component first mounts.
 
+  // Reusable component/function to render country details
   let CountryDetails = (c) => {
     console.log("selected Country",c)
     return (
         <div>
-          <p>Unique Match Found</p>
+          <p>Country Details</p>
           <h3>{c.name.official}</h3>
-          <li> Capital: {c.capital[0]} </li>
+          <li> Capital: {c.capital && c.capital[0]} </li>
           <li> Area: {c.area} </li>
 
           <h4>Languages</h4>
           <ul>
-            {/* 1. Use Object.entries() to convert the object into an array of [key, value] pairs. 
-                Example Output: [['eng', 'English'], ['hin', 'Hindi'], ['tam', 'Tamil']] */}
-
-            {Object.entries(c.languages).map(([code, name]) => {
-              // 2. Destructure the array into two variables: 'code' (key) and 'name' (value).
+            {/* Added check for c.languages existence and type safety */}
+            {c.languages && Object.entries(c.languages).map(([code, name]) => {
               return (
-                // 3. Render the key and value, using the key (code) for the list item key prop.
                 <li key={code}>
                   {code.toUpperCase()}: {name}
                 </li>
@@ -53,11 +51,8 @@ function App() {
 
           
           <li>Flag Emoji: {c.flag} </li>
-          <img src={c.flags.png} alt="" />
-          {/* <img src={c.flags.svg} alt="" /> */}
-
-
-          {/* In a real app, you would show detailed info like capital, population, etc., here */}
+          {/* Ensure c.flags exists before accessing png */}
+          {c.flags && <img src={c.flags.png} alt={`Flag of ${c.name.official}`} />}
         </div>
       )  
   }
@@ -66,6 +61,14 @@ function App() {
   const handleCountryChange = (event) => {
     console.log(event.target.value)
     setCountry(event.target.value)
+    // Clear the selected detail view whenever the search query changes
+    setSelectedCountry(null)
+  }
+
+  // Handler for the "show" button click
+  const handleShowClick = (countryObject) => {
+    // This updates state, triggering a re-render where displayContent will use it.
+    setSelectedCountry(countryObject);
   }
 
   let match = cdata.filter((c) => {
@@ -76,27 +79,29 @@ function App() {
   })
 
   let displayContent;
-  if (country === '') {
-    // Condition A: Search input is empty. Show nothing.
+  
+  // Highest priority check: If a country is selected, display its details immediately.
+  if (selectedCountry) {
+    // The details view is active, so render the details component.
+    displayContent = CountryDetails(selectedCountry);
+  } else if (country === '') {
+    // Condition A: Search input is empty. Show message.
     displayContent = <p>Start typing a country name to search.</p>
   } else if (match.length > 10) {
     // Condition B: More than 10 matches found. Display the count.
     displayContent = <p>{match.length} countries found. Please make your query more specific.</p>
   } else if (match.length > 1) {
-    // Condition C: Between 2 and 10 matches found. Display the list.
+    // Condition C: Between 2 and 10 matches found. Display the list with "show" buttons.
     displayContent = (
       <div>
         <h3>Matching Countries:</h3>
         <ul>
-          {/* Map through the filtered list and display each match */}
           {match.map((c) => (
             <div key={c.name.official}>
             <li>
-              {/* <TODO> On Button Click, show details of Country reusing logic of exact country match found</TODO> */}
-              {c.name.official} <button onClick={() => {
-                  setSelectedCountry(c)
-                  displayContent = CountryDetails(c)
-                }}>  show</button> 
+              {c.name.official} 
+              {/* Correctly call the state handler to trigger re-render. */}
+              <button onClick={() => handleShowClick(c)}>  show</button> 
             </li>
             </div>
           ))}
@@ -104,18 +109,13 @@ function App() {
       </div>
     )
   } else if (match.length === 1) {
-    // Condition D: Exactly 1 match found. Display the list (or detailed view, but here just the name).
-    console.log(match)
+    // Condition D: Exactly 1 match found. Automatically show details.
     let c = match[0]
     displayContent = CountryDetails(c)
   } else {
     // Condition E: 0 matches found, but the search input is not empty.
     displayContent = <p>No countries match "{country}".</p>
   }
-
-
-
-
 
 
   return (
