@@ -4,10 +4,10 @@ import axios from "axios";
 
 import countryService from './services/country'
 
-
 function App() {
   const [country, setCountry] = useState('')
   const [cdata, setCdata] = useState([])
+  const [selectedCountry, setSelectedCountry] = useState('')
 
   useEffect(() => {
     countryService.getAll()
@@ -25,6 +25,43 @@ function App() {
       
     })
   }, []) // [] empty dependancy array: API call runs only once when the component first mounts.
+
+  let CountryDetails = (c) => {
+    console.log("selected Country",c)
+    return (
+        <div>
+          <p>Unique Match Found</p>
+          <h3>{c.name.official}</h3>
+          <li> Capital: {c.capital[0]} </li>
+          <li> Area: {c.area} </li>
+
+          <h4>Languages</h4>
+          <ul>
+            {/* 1. Use Object.entries() to convert the object into an array of [key, value] pairs. 
+                Example Output: [['eng', 'English'], ['hin', 'Hindi'], ['tam', 'Tamil']] */}
+
+            {Object.entries(c.languages).map(([code, name]) => {
+              // 2. Destructure the array into two variables: 'code' (key) and 'name' (value).
+              return (
+                // 3. Render the key and value, using the key (code) for the list item key prop.
+                <li key={code}>
+                  {code.toUpperCase()}: {name}
+                </li>
+              )
+            })}
+          </ul>
+
+          
+          <li>Flag Emoji: {c.flag} </li>
+          <img src={c.flags.png} alt="" />
+          {/* <img src={c.flags.svg} alt="" /> */}
+
+
+          {/* In a real app, you would show detailed info like capital, population, etc., here */}
+        </div>
+      )  
+  }
+
 
   const handleCountryChange = (event) => {
     console.log(event.target.value)
@@ -53,7 +90,15 @@ function App() {
         <ul>
           {/* Map through the filtered list and display each match */}
           {match.map((c) => (
-            <li key={c.name.official}>{c.name.official}</li>
+            <div key={c.name.official}>
+            <li>
+              {/* <TODO> On Button Click, show details of Country reusing logic of exact country match found</TODO> */}
+              {c.name.official} <button onClick={() => {
+                  setSelectedCountry(c)
+                  displayContent = CountryDetails(c)
+                }}>  show</button> 
+            </li>
+            </div>
           ))}
         </ul>
       </div>
@@ -62,38 +107,7 @@ function App() {
     // Condition D: Exactly 1 match found. Display the list (or detailed view, but here just the name).
     console.log(match)
     let c = match[0]
-    displayContent = (
-      <div>
-        <p>Unique Match Found</p>
-        <h3>{c.name.official}</h3>
-        <li> Capital: {c.capital[0]} </li>
-        <li> Area: {c.area} </li>
-
-        <h4>Languages</h4>
-        <ul>
-          {/* 1. Use Object.entries() to convert the object into an array of [key, value] pairs. 
-              Example Output: [['eng', 'English'], ['hin', 'Hindi'], ['tam', 'Tamil']] */}
-
-          {Object.entries(c.languages).map(([code, name]) => {
-            // 2. Destructure the array into two variables: 'code' (key) and 'name' (value).
-            return (
-              // 3. Render the key and value, using the key (code) for the list item key prop.
-              <li key={code}>
-                {code.toUpperCase()}: {name}
-              </li>
-            )
-          })}
-        </ul>
-
-        
-        <li>Flag Emoji: {c.flag} </li>
-        <img src={c.flags.png} alt="" />
-        {/* <img src={c.flags.svg} alt="" /> */}
-
-
-        {/* In a real app, you would show detailed info like capital, population, etc., here */}
-      </div>
-    )
+    displayContent = CountryDetails(c)
   } else {
     // Condition E: 0 matches found, but the search input is not empty.
     displayContent = <p>No countries match "{country}".</p>
