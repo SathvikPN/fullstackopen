@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
-
+// FIX: This middleware is REQUIRED to parse JSON content 
+// from the request body (req.body will no longer be undefined).
+app.use(express.json())
 
 let persons = [
     { 
@@ -43,6 +45,36 @@ app.get("/api/persons/:id", (req, res) => {
   } else {
     res.status(404).end()
   }
+})
+
+app.post("/api/persons", (req, res) => {
+  const body = req.body
+  console.log("Received body:", body); // Will no longer be undefined
+
+  if(!body || !body.name || !body.number) {
+    return res.status(400).end("name/number missing")
+  }
+
+  if(persons.some(person => person.name === body.name)) {
+    return res.status(409).json({ error: 'name must be unique' })
+  }
+
+  const person = {
+    id: crypto.randomUUID(),
+    name: body.name || 'no name',
+    number: String(body.number)
+  }
+
+  persons = persons.concat(person)
+  console.log(persons)
+  res.status(200).json(person)
+  
+})
+
+app.delete("/api/persons/:id", (req, res) => {
+  const id = req.params.id
+  persons = persons.filter(person => person.id !== id)
+  res.status(404).end()
 })
 
 const PORT = 3001

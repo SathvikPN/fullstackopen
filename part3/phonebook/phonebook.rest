@@ -8,3 +8,12 @@ GET http://localhost:3001/info
 GET http://localhost:3001/api/persons/9
 ############################################
 GET http://localhost:3001/api/persons/3
+
+###
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "hi",
+    "number": 123
+}
