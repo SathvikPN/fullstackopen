@@ -1,0 +1,26 @@
+{
+  "name": "backend",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [
+    "hello",
+    "backend",
+    "fullstackopen"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "backend"
+  },
+  "license": "MIT",
+  "author": "sathvik",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "test": "\"echo 'No Test specified'\""
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
