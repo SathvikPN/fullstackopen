@@ -27,7 +27,12 @@ let persons = [
 
 // http://localhost:3001/api/persons 
 app.get("/api/persons", (request, response) => {
-    response.json(persons)
+  response.json(persons)
+})
+
+app.get("/info", (request, response) => {
+  let content = `Phonebook has info for ${persons.length} people \n${new Date()}`
+  response.send(content)
 })
 
 const PORT = 3001
